@@ -2,9 +2,15 @@ import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
+import React, {useState} from 'react';
+import CartModal from './CartModal';
 
 const NavBar = () => {
+  const [showCart, setShowCart] = useState(false)
+  const showCartHandler = () => setShowCart(true)
+ const handleClose = () => setShowCart(false)
   return (
+    <>
     <Navbar bg="dark" variant="dark">
         <Container className="d-flex justify-content-between">
         <h1 style={{color:"white"}}>The Generic Store</h1>
@@ -25,11 +31,14 @@ const NavBar = () => {
         
       </Nav>
       
-      <Button variant="light" className="ml-3">Cart</Button>
+      <Button variant="light" className="ml-3" onClick={showCartHandler}>Cart</Button>
       </Container>
       
       
       </Navbar>
+      {showCart && <CartModal showCart={showCart}
+      handleClose={handleClose}/>}
+      </>
   );
 }
 
